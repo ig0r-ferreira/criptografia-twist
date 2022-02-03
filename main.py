@@ -1,3 +1,6 @@
+from cryptotwist import codificar, decodificar
+
+
 def exibir_erro(_erro):
     # Exibe uma mensagem de erro com a cor da fonte em vermelho
     print(f'\033[1;31mErro: {_erro}\033[m')
@@ -86,12 +89,29 @@ def solicitar_chave(_msg):
     return _chave
 
 
-print()
-# Solicita que o usuário escolha entre codificar ou decodificar
-operacao = solicitar_operacao()
-print()
-# Solicita que o usuário informe a mensagem que será utilizada para fazer a operação escolhida
-mensagem = solicitar_mensagem()
-print()
-# Solicita a chave que será utilizada nas operações de codificação e decodificação
-chave = solicitar_chave(mensagem)
+print(f'\n\033[1m{" CRIPTOGRAFIA TWIST ":-^100}\033[m')
+while True:
+    print()
+    # Solicita que o usuário escolha entre codificar ou decodificar
+    operacao = solicitar_operacao()
+    print()
+    # Solicita que o usuário informe a mensagem que será utilizada para fazer a operação escolhida
+    mensagem = solicitar_mensagem()
+    print()
+    # Solicita a chave que será utilizada nas operações de codificação e decodificação
+    chave = solicitar_chave(mensagem)
+    print()
+
+    if operacao == 0:
+        resultado = codificar(mensagem, chave)
+    else:
+        resultado = decodificar(mensagem, chave)
+
+    print(f'Resultado: {resultado}\n')
+
+    continuar = None
+    while continuar != 'N' and continuar != 'S':
+        continuar = input('\033[1m* Você deseja continuar [S/N]?\033[m ').strip().upper()
+
+    if continuar == 'N':
+        break
