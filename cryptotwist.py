@@ -1,4 +1,4 @@
-def char_para_int(c):
+def __char_para_int(c):
     """
     :param c: Um caracter
     :return: Um número inteiro, ou None se <b>c</b> diferente de
@@ -17,7 +17,7 @@ def char_para_int(c):
         return None
 
 
-def int_para_char(d):
+def __int_para_char(d):
     """
     :param d: Um número inteiro
     :return: Um caracter, ou None se <b>d &lt; 0</b> ou <b>d &gt; 27</b>
@@ -49,7 +49,7 @@ def codificar(textoplano, k):
 
     # Gera uma nova lista onde os elementos são os números obtidos
     # para cada caracter de 'textoplano'
-    codigoplano = list(map(char_para_int, textoplano))
+    codigoplano = list(map(__char_para_int, textoplano))
 
     cifradocodigo = []
     # Para cada elemento de 'codigoplano' é calculado um novo número utilizando a chave k,
@@ -60,7 +60,7 @@ def codificar(textoplano, k):
 
     # Gera uma nova lista a partir de 'cifradocodigo' onde cada elemento é convertido
     # para caracter novamente
-    textocifrado = list(map(int_para_char, cifradocodigo))
+    textocifrado = list(map(__int_para_char, cifradocodigo))
     textocifrado = ''.join(textocifrado)
 
     return textocifrado
@@ -80,7 +80,7 @@ def decodificar(textocifrado, k):
 
     # Gera uma nova lista onde os elementos são os números obtidos
     # para cada caracter de 'textocifrado'
-    cifradocodigo = list(map(char_para_int, textocifrado))
+    cifradocodigo = list(map(__char_para_int, textocifrado))
 
     # Inicializa 'codigoplano' com valores nulos e com o mesmo tamanho de 'texto cifrado'
     codigoplano = list([None] * n)
@@ -95,7 +95,7 @@ def decodificar(textocifrado, k):
 
     # Gera uma nova lista a partir de 'codigoplano' onde cada elemento é convertido
     # para caracter novamente
-    textoplano = list(map(int_para_char, codigoplano))
+    textoplano = list(map(__int_para_char, codigoplano))
     textoplano = ''.join(textoplano)
 
     return textoplano
@@ -133,3 +133,4 @@ if __name__ == '__main__':
               f'- Texto codificado: {texto_codificado}\n'
               f'- Chave: {chave}\n'
               f'- Texto original: {texto_original}')
+        
