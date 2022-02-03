@@ -66,16 +66,70 @@ def codificar(textoplano, k):
     return textocifrado
 
 
+def decodificar(textocifrado, k):
+    """
+    :param textocifrado: String codificada
+    :param k: Chave que será utilizada na decodificação, deve ser um número inteiro
+    :return: String decodificada
+
+    Retorna uma string decodificada a partir da utilização do método Twist.
+    """
+
+    # 'n' recebe a quantidade de caracteres do texto codificado
+    n = len(textocifrado)
+
+    # Gera uma nova lista onde os elementos são os números obtidos
+    # para cada caracter de 'textocifrado'
+    cifradocodigo = list(map(char_para_int, textocifrado))
+
+    # Inicializa 'codigoplano' com valores nulos e com o mesmo tamanho de 'texto cifrado'
+    codigoplano = list([None] * n)
+
+    # Cada elemento de 'cifradocodigo' é revertido para o número que corresponde
+    # ao caracter original.
+    # Em seguida, utilizando a chave 'k', o número é armazenado na sua posição original
+    for i in range(0, len(cifradocodigo)):
+        cod_ant = (cifradocodigo[i] + i) % 28
+        pos = (k * i) % n
+        codigoplano[pos] = cod_ant
+
+    # Gera uma nova lista a partir de 'codigoplano' onde cada elemento é convertido
+    # para caracter novamente
+    textoplano = list(map(int_para_char, codigoplano))
+    textoplano = ''.join(textoplano)
+
+    return textoplano
+
+
 if __name__ == '__main__':
     exemplos = [
+        {'texto': 'ola', 'chave': 5},
         {'texto': 'wxyz', 'chave': 5},
         {'texto': 'cachorro.', 'chave': 11},
         {'texto': 'espero_que_funcione.', 'chave': 29}
     ]
 
     print(f'\n\033[1m{" Codificação ":-^50}\033[m')
-    for i, ex in enumerate(exemplos):
-        print(f'\033[1mTeste {i + 1}:\033[m\n'
-              f'- Texto: {ex.get("texto")}\n'
-              f'- Chave: {ex.get("chave")}\n'
-              f'- Texto codificado: {codificar(ex.get("texto"), ex.get("chave"))}')
+    for index, ex in enumerate(exemplos):
+        texto = ex.get('texto')
+        chave = ex.get('chave')
+        texto_codificado = codificar(texto, chave)
+        ex['texto_codificado'] = texto_codificado
+
+        print(f'\033[1mTeste {index + 1}:\033[m\n'
+              f'- Texto: {texto}\n'
+              f'- Chave: {chave}\n'
+              f'- Texto codificado: {texto_codificado}')
+
+    print(f'\n\033[1m{" Decodificação ":-^50}\033[m')
+    for index, ex in enumerate(exemplos):
+
+        texto_codificado = ex.get('texto_codificado')
+        chave = ex.get('chave')
+
+        texto_original = decodificar(texto_codificado, chave)
+
+        print(f'\033[1mTeste {index + 1}:\033[m\n'
+              f'- Texto codificado: {texto_codificado}\n'
+              f'- Chave: {chave}\n'
+              f'- Texto original: {texto_original}')
