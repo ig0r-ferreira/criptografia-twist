@@ -1,14 +1,17 @@
 from cryptotwist import codificar, decodificar
+from colorama import init, Fore, Style
+
+init(autoreset=True)
 
 
 def exibir_erro(_erro):
     # Exibe uma mensagem de erro com a cor da fonte em vermelho
-    print(f'\033[1;31mErro: {_erro}\033[m')
+    print(f'{Fore.RED + Style.BRIGHT}Erro: {_erro}')
 
 
 largura_separador = 100
 
-print(f'\n\033[1m{" CRIPTOGRAFIA TWIST ":^100}\033[m')
+print(f'\n{Style.BRIGHT}{" CRIPTOGRAFIA TWIST ":^100}')
 
 while True:
     print(f'\n{"=" * largura_separador}')
@@ -56,13 +59,13 @@ while True:
             exibir_erro('Falha na decodificação!\n' + str(erro))
 
     if resultado is not None:
-        print(f'- \033[1;32mResultado:\033[m {resultado}')
+        print(f'- {Fore.GREEN + Style.BRIGHT}Resultado: {resultado}')
 
     print(f'{"=" * largura_separador}\n')
 
     continuar = None
     while continuar != 'N' and continuar != 'S':
-        continuar = input('\033[1m* Você deseja continuar [S/N]?\033[m ').strip().upper()
+        continuar = input('* Você deseja continuar [S/N]? ').strip().upper()
 
     if continuar == 'N':
         break

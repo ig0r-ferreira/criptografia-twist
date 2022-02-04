@@ -1,3 +1,8 @@
+from colorama import init, Style
+
+init(autoreset=True)
+
+
 def __char_para_int(c):
     """
     :param c: Um caracter
@@ -180,19 +185,19 @@ if __name__ == '__main__':
         {'texto': 'espero_que_funcione.', 'chave': 29}
     ]
 
-    print(f'\n\033[1m{" Codificação ":-^50}\033[m')
+    print(f'\n{Style.BRIGHT}{" Codificação ":-^50}')
     for index, ex in enumerate(exemplos):
         texto = ex.get('texto')
         chave = ex.get('chave')
         texto_codificado = codificar(texto, chave)
         ex['texto_codificado'] = texto_codificado
 
-        print(f'\033[1mTeste {index + 1}:\033[m\n'
+        print(f'{Style.BRIGHT}Teste {index + 1}:{Style.RESET_ALL}\n'
               f'- Texto: {texto}\n'
               f'- Chave: {chave}\n'
               f'- Texto codificado: {texto_codificado}')
 
-    print(f'\n\033[1m{" Decodificação ":-^50}\033[m')
+    print(f'\n{Style.BRIGHT}{" Decodificação ":-^50}')
     for index, ex in enumerate(exemplos):
 
         texto_codificado = ex.get('texto_codificado')
@@ -200,7 +205,7 @@ if __name__ == '__main__':
 
         texto_original = decodificar(texto_codificado, chave)
 
-        print(f'\033[1mTeste {index + 1}:\033[m\n'
+        print(f'{Style.BRIGHT}Teste {index + 1}:{Style.RESET_ALL}\n'
               f'- Texto codificado: {texto_codificado}\n'
               f'- Chave: {chave}\n'
               f'- Texto original: {texto_original}')
