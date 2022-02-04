@@ -35,6 +35,67 @@ def __int_para_char(d):
         return None
 
 
+def __validar_texto(textoplano):
+    """
+    :param textoplano: String
+    :return: None
+
+    Verifica se o texto contém apenas *letras minúsculas*, *pontos(.)* e *undescores(_)*.
+    Levanta uma exceção caso contenha qualquer outro caracter não especificado.
+    """
+
+    if type(textoplano) is not str:
+        raise Exception('\'textoplano\' não é uma string!')
+
+    if ' ' in textoplano:
+        raise Exception('O texto não deve conter espaços. Se necessário, utilize \'_\'.')
+
+    if len(textoplano) > 70:
+        raise Exception('O tamanho máximo do texto deve ser de 70 caracteres.')
+
+    elif len(textoplano) < 1:
+        raise Exception('O tamanho mínimo do texto deve ser de 1 caracter.')
+
+    # Remove os caracteres '.' e '_' da string
+    somente_palavras = textoplano.replace('.', '').replace('_', '')
+
+    # Cria uma lista com os códigos de cada caracter
+    msg_ascii = list(map(lambda l: ord(l), somente_palavras))
+
+    # Verifica se há qualquer outro caracter fora do intervalo [a-z] em minúsculo
+    if min(msg_ascii) < 97 or max(msg_ascii) > 122:
+        raise Exception(f'\'{textoplano}\' não é um texto válido! É permitido apenas '
+                        f'letras minúsculas e sem acentos, pontos(.) e underscore(_).')
+
+
+def __validar_chave(k, textoplano):
+    """
+    :param k: Número inteiro
+    :param textoplano: String
+    :return: None
+
+    Verifica se a chave: \n
+    - É um número inteiro
+    - Está no intervalo de 1 a 300
+    - Chave e a quantidade de caracteres de *textoplano* são primos entre si
+
+    Caso contrário levanta uma exceção.
+    """
+
+    if type(k) is not int:
+        raise Exception('\'k\' não é um número inteiro!')
+
+    if k < 1 or k > 300:
+        raise Exception('Chave inválida! A chave deve ser um número entre 1 e 300.')
+
+    from math import gcd
+
+    # Verifica se a chave e o tamanho da mensagem não são primos entre si
+    if gcd(k, len(textoplano)) != 1:
+        raise Exception('Tente com outra chave! A chave e a quantidade de caracteres '
+                        'devem ser primos entre si.')
+
+
 def codificar(textoplano, k):
     """
     :param textoplano: String que será codificada
@@ -43,6 +104,11 @@ def codificar(textoplano, k):
 
     Retorna uma string codificada a partir da utilização do método Twist.
     """
+
+    # Valida o texto informado
+    __validar_texto(textoplano)
+    # Valida a chave informada
+    __validar_chave(k, textoplano)
 
     # 'n' recebe a quantidade de caracteres do texto que será codificado
     n = len(textoplano)
@@ -74,6 +140,11 @@ def decodificar(textocifrado, k):
 
     Retorna uma string decodificada a partir da utilização do método Twist.
     """
+
+    # Valida o texto informado
+    __validar_texto(textocifrado)
+    # Valida a chave informada
+    __validar_chave(k, textocifrado)
 
     # 'n' recebe a quantidade de caracteres do texto codificado
     n = len(textocifrado)
@@ -133,4 +204,3 @@ if __name__ == '__main__':
               f'- Texto codificado: {texto_codificado}\n'
               f'- Chave: {chave}\n'
               f'- Texto original: {texto_original}')
-        
