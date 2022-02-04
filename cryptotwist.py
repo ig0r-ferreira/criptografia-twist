@@ -45,16 +45,16 @@ def __validar_texto(textoplano):
     """
 
     if type(textoplano) is not str:
-        raise Exception('\'textoplano\' não é uma string!')
+        raise TypeError('\'textoplano\' não é uma string!')
 
     if ' ' in textoplano:
-        raise Exception('O texto não deve conter espaços. Se necessário, utilize \'_\'.')
+        raise ValueError('O texto não deve conter espaços. Se necessário, utilize \'_\'.')
 
     if len(textoplano) > 70:
-        raise Exception('O tamanho máximo do texto deve ser de 70 caracteres.')
+        raise ValueError('O tamanho máximo do texto deve ser de 70 caracteres.')
 
     elif len(textoplano) < 1:
-        raise Exception('O tamanho mínimo do texto deve ser de 1 caracter.')
+        raise ValueError('O tamanho mínimo do texto deve ser de 1 caracter.')
 
     # Remove os caracteres '.' e '_' da string
     somente_palavras = textoplano.replace('.', '').replace('_', '')
@@ -64,8 +64,8 @@ def __validar_texto(textoplano):
 
     # Verifica se há qualquer outro caracter fora do intervalo [a-z] em minúsculo
     if min(msg_ascii) < 97 or max(msg_ascii) > 122:
-        raise Exception(f'\'{textoplano}\' não é um texto válido! É permitido apenas '
-                        f'letras minúsculas e sem acentos, pontos(.) e underscore(_).')
+        raise ValueError(f'\'{textoplano}\' não é um texto válido! É permitido apenas '
+                         f'letras minúsculas e sem acentos, pontos(.) e underscore(_).')
 
 
 def __validar_chave(k, textoplano):
@@ -83,17 +83,17 @@ def __validar_chave(k, textoplano):
     """
 
     if type(k) is not int:
-        raise Exception('\'k\' não é um número inteiro!')
+        raise TypeError('\'k\' não é um número inteiro!')
 
     if k < 1 or k > 300:
-        raise Exception('Chave inválida! A chave deve ser um número entre 1 e 300.')
+        raise ValueError('Chave inválida! A chave deve ser um número entre 1 e 300.')
 
     from math import gcd
 
     # Verifica se a chave e o tamanho da mensagem não são primos entre si
     if gcd(k, len(textoplano)) != 1:
-        raise Exception('Tente com outra chave! A chave e a quantidade de caracteres '
-                        'devem ser primos entre si.')
+        raise ValueError('Tente com outra chave! A chave e a quantidade de caracteres '
+                         'devem ser primos entre si.')
 
 
 def codificar(textoplano, k):
