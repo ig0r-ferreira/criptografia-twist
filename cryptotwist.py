@@ -50,7 +50,7 @@ def __validar_texto(textoplano):
     """
 
     if type(textoplano) is not str:
-        raise TypeError('\'textoplano\' não é uma string!')
+        raise TypeError(f'\'{textoplano}\' não é uma string!')
 
     if ' ' in textoplano:
         raise ValueError('O texto não deve conter espaços. Se necessário, utilize \'_\'.')
@@ -88,7 +88,7 @@ def __validar_chave(k, textoplano):
     """
 
     if type(k) is not int:
-        raise TypeError('\'k\' não é um número inteiro!')
+        raise TypeError(f'\'{k}\' não é um número inteiro!')
 
     if k < 1 or k > 300:
         raise ValueError('Chave inválida! A chave deve ser um número entre 1 e 300.')
