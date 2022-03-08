@@ -9,7 +9,7 @@ Esse repositório contém a solucão para o 1º Challenge de Python da Let's Cod
 Nele é apresentado o **método Twist**, que consiste na utilização de uma chave para codificar e decodificar um texto.
 
 
-## Instruções do desafio
+## Instruções do desafio :clipboard:
 [Challenge Dados - Fevereiro](https://github.com/ig0r-ferreira/criptografia-twist/files/8006381/Challenge_Dados_-_Fevereiro.pdf)
 
 
@@ -38,8 +38,13 @@ Nele é apresentado o **método Twist**, que consiste na utilização de uma cha
 - [Python](https://www.python.org/)
 - [Colorama](https://pypi.org/project/colorama/)
 
-## Licença 
+## Autor ✍️
 
-The [MIT License]() (MIT)
+|[<img src="https://user-images.githubusercontent.com/35473390/157141627-ae546ba7-c07d-4313-b71a-e48d059a3ee6.jpg" width="130px;"/><br><sub><b>Igor Ferreira</b></sub>](https://github.com/ig0r-ferreira/)|
+|---|
 
-Copyright :copyright: 2022 - criptografia-twist
+## Licença 📜
+
+The [MIT License](LICENSE) (MIT)
+
+Copyright :copyright: 2022 - Criptografia via método de substituição (Twist)
